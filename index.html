@@ -814,7 +814,8 @@
         <!-- BLOC 2: Selecció de cursos -->
         <div class="form-bloc">
           <h3>Selecció de cursos</h3>
-          <p style="font-size:0.88rem; color:#666; margin-bottom:1rem;">Pots seleccionar més d'un curs. En marcar-lo, tria l'horari del grup.</p>
+          <p style="font-size:0.88rem; color:#666; margin-bottom:0.5rem;">Pots seleccionar més d'un curs. En marcar-lo, tria l'horari del grup.</p>
+          <p style="font-size:0.88rem; color:#666; margin-bottom:1rem;">L'assignació de plaça es confirmarà per correu electrònic o WhatsApp durant el mes de setembre.</p>
 
           <!-- Rockin -->
           <div class="curs-check-item" id="item-rockin">
@@ -1021,18 +1022,18 @@
               <label class="radio-nivell" id="lbl-niv2"><input type="radio" name="nivell" value="2" onchange="selectNivell('2')" /> 2 — Ja tinc una mica de nivell i m'agradaria aprofundir-hi</label>
             </div>
           </div>
+        </div>
+
+        <!-- BLOC 4: Ens interessa la teva opinió -->
+        <div class="form-bloc">
+          <h3>Ens interessa la teva opinió</h3>
           <div class="form-group">
             <label for="formacio">Formes part d'alguna formació musical?</label>
             <input type="text" id="formacio" name="formacio_musical" placeholder="Ex: banda de l'escola, coral, grup de rock..." />
           </div>
-        </div>
-
-        <!-- BLOC 4: Observacions -->
-        <div class="form-bloc">
-          <h3>Observacions</h3>
           <div class="form-group">
-            <label for="observacions">Vols afegir alguna cosa?</label>
-            <textarea id="observacions" name="observacions" placeholder="Qualsevol informació que vulguis compartir..."></textarea>
+            <label for="observacions">Comentaris, observacions o propostes</label>
+            <textarea id="observacions" name="observacions" placeholder="Activitats que t'agradaria fer, horaris que et van millor, propostes de cursos... tot ens ajuda!"></textarea>
           </div>
         </div>
 
@@ -1042,7 +1043,7 @@
           <div class="form-group">
             <div class="checkbox-rgpd">
               <input type="checkbox" id="rgpd" name="consentiment_rgpd" required />
-              <span>He llegit i accepto el tractament de les meves dades personals per part de Casa de la Música de Manresa, d'acord amb el Reglament General de Protecció de Dades (RGPD). Les dades proporcionades s'utilitzaran únicament per a la gestió de la inscripció als cursos.</span>
+              <span>He llegit i accepto la <a href="politica-privacitat-ccmm.pdf" target="_blank" style="color:var(--vermell);">política de privacitat</a> del Centre de Creació Musical de Manresa. Les dades proporcionades s'utilitzaran únicament per a la gestió de la preinscripció als cursos.</span>
             </div>
           </div>
           <button type="submit" class="submit-btn" id="btn-enviar">Enviar inscripció</button>
