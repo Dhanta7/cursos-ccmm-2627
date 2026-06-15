@@ -479,7 +479,7 @@
 <!-- HERO -->
 <div class="hero">
   <h1 style="text-transform:uppercase;">Preinscripcions al<br><em>Centre de Creació Musical de Manresa</em></h1>
-  <p style="font-size:1.2rem; font-weight:bold; letter-spacing:0.05em; text-transform:uppercase; opacity:1;">Curs 2026–2027</p>
+  <p style="font-size:1.6rem; font-weight:bold; letter-spacing:0.05em; text-transform:uppercase; opacity:1;">Curs 2026–2027</p>
   <p>Tria el teu instrument, el teu horari i el teu nivell. Des del primer dia, fas música de veritat.</p>
   <a href="#formulari" class="hero-btn">Inscriu-te ara</a>
 </div>
@@ -681,10 +681,10 @@
         <p>El que cal és ganes de tocar. Aprendràs els fonaments del ritme, la coordinació i els patrons bàsics del rock i els estils moderns. Classes individuals, per a tots els nivells.</p>
         <div class="curs-horaris">
           <strong>Horaris (classes individuals)</strong>
-          <div class="horari-row"><span class="horari-grup">Gr. 1</span><span class="horari-dia">Dimarts</span><span class="horari-hora">15h</span></div>
-          <div class="horari-row"><span class="horari-grup">Gr. 2</span><span class="horari-dia">Dimarts</span><span class="horari-hora">16h</span></div>
-          <div class="horari-row"><span class="horari-grup">Gr. 3</span><span class="horari-dia">Dimarts</span><span class="horari-hora">17h</span></div>
-          <div class="horari-row"><span class="horari-grup">Gr. 4</span><span class="horari-dia">Dimarts</span><span class="horari-hora">18h</span></div>
+          <div class="horari-row"><span class="horari-dia">Dimarts</span><span class="horari-hora">15h</span></div>
+          <div class="horari-row"><span class="horari-dia">Dimarts</span><span class="horari-hora">16h</span></div>
+          <div class="horari-row"><span class="horari-dia">Dimarts</span><span class="horari-hora">17h</span></div>
+          <div class="horari-row"><span class="horari-dia">Dimarts</span><span class="horari-hora">18h</span></div>
           <p class="curs-duracio">⏱ 1 hora per sessió</p>
         </div>
       </div>
@@ -761,23 +761,10 @@
     <div class="divider"></div>
     <div class="form-wrap">
 
-      <!--
-        IMPORTANT: Per rebre les inscripcions per correu, cal:
-        1. Crear un compte gratuït a https://formspree.io
-        2. Crear un nou formulari i copiar el codi (exemple: "abcdefgh")
-        3. Substituir "YOUR_FORM_ID" a l'atribut action per l'ID real
-        Exemple: action="https://formspree.io/f/abcdefgh"
-      -->
-      <div style="margin-bottom:1.5rem;">
-        <div style="background:#fff8f0; border-left:4px solid var(--vermell); padding:1rem 1.2rem; margin-bottom:0.75rem; font-size:0.92rem; color:#333;">
-          🔸 La preinscripció no garanteix la plaça. L'assignació es farà en funció de la disponibilitat i l'ordre d'inscripció.
-        </div>
-        <div style="background:#fff8f0; border-left:4px solid var(--vermell); padding:1rem 1.2rem; font-size:0.92rem; color:#333;">
-          🔸 No cal tenir coneixements previs per a la realització dels cursos.
-        </div>
-      </div>
+      <p style="font-size:0.97rem; color:#444; margin-bottom:1.8rem; line-height:1.7;">Aquest formulari serveix per recollir les primeres dades dels interessats i interessades.<br><br>Al setembre ens posarem en contacte amb cada persona preinscrita per confirmar la plaça i assignar els dies i horaris disponibles.</p>
 
-      <form id="form-inscripcio" action="https://formspree.io/f/mrevqkob" method="POST">
+      <form id="form-inscripcio" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="214cdb6f-8c7f-4417-bb75-b77c8beb9177" />
 
         <!-- BLOC 1: Dades personals -->
         <div class="form-bloc">
@@ -789,7 +776,9 @@
           <div class="form-row">
             <div class="form-group">
               <label for="data-naix">Data de naixement <span class="req">*</span></label>
-              <input type="date" id="data-naix" name="data_naixement" required />
+              <input type="date" id="data-naix" name="data_naixement" required onchange="calcularEdat()" />
+              <input type="hidden" id="edat-hidden" name="edat" />
+              <p class="hint" id="edat-calculada" style="display:none;"></p>
             </div>
             <div class="form-group">
               <label for="telefon">Telèfon de contacte <span class="req">*</span></label>
@@ -817,19 +806,36 @@
           <p style="font-size:0.88rem; color:#666; margin-bottom:0.5rem;">Pots seleccionar més d'un curs. En marcar-lo, tria l'horari del grup.</p>
           <p style="font-size:0.88rem; color:#666; margin-bottom:1rem;">L'assignació de plaça es confirmarà per correu electrònic o WhatsApp durant el mes de setembre.</p>
 
-          <!-- Rockin -->
-          <div class="curs-check-item" id="item-rockin">
-            <div class="curs-check-header" onclick="toggleCurs('rockin')">
-              <input type="checkbox" id="check-rockin" name="curs_rockin" value="si" onchange="toggleCurs('rockin')" />
-              <span>Rockin — Música en grup <span class="durada">· 1h/sessió</span></span>
+          <!-- Cant -->
+          <div class="curs-check-item" id="item-cant">
+            <div class="curs-check-header" onclick="toggleCurs('cant')">
+              <input type="checkbox" id="check-cant" name="curs_cant" value="si" onchange="toggleCurs('cant')" />
+              <span>Cant <span class="durada">· 1h/sessió</span></span>
             </div>
-            <div class="curs-grup-select" id="sel-rockin">
-              <select name="grup_rockin">
+            <div class="curs-grup-select" id="sel-cant">
+              <select name="grup_cant">
                 <option value="">— Tria el grup —</option>
-                <option value="Sènior +65 · Dijous 11h">Sènior (+65) · Dijous 11h</option>
-                <option value="Emergent 12–17 · Dimecres 17h">Emergent (12–17 anys) · Dimecres 17h</option>
-                <option value="Jove 18–34 · Dimecres 18h">Jove (18–34 anys) · Dimecres 18h</option>
-                <option value="Adult 35–64 · Dimecres 19h">Adult (35–64 anys) · Dimecres 19h</option>
+                <option value="Senior +65 · Dilluns 11h">Senior (+65) · Dilluns 11h</option>
+                <option value="Emergent 12–17 · Dimarts 16h">Emergent (12–17) · Dimarts 16h</option>
+                <option value="Jove 18–34 · Dimarts 17h">Jove (18–34) · Dimarts 17h</option>
+                <option value="Adult 35–64 · Dimarts 18h">Adult (35–64) · Dimarts 18h</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Teclat -->
+          <div class="curs-check-item" id="item-teclat">
+            <div class="curs-check-header" onclick="toggleCurs('teclat')">
+              <input type="checkbox" id="check-teclat" name="curs_teclat" value="si" onchange="toggleCurs('teclat')" />
+              <span>Teclat <span class="durada">· 1h/sessió</span></span>
+            </div>
+            <div class="curs-grup-select" id="sel-teclat">
+              <select name="grup_teclat">
+                <option value="">— Tria el grup —</option>
+                <option value="Sènior +65 · Dilluns 12h">Sènior (+65) · Dilluns 12h</option>
+                <option value="Emergent 12–17 · Dimarts 16h">Emergent (12–17) · Dimarts 16h</option>
+                <option value="Jove 18–34 · Dimarts 17h">Jove (18–34) · Dimarts 17h</option>
+                <option value="Adult 35–64 · Dimarts 18h">Adult (35–64) · Dimarts 18h</option>
               </select>
             </div>
           </div>
@@ -885,40 +891,6 @@
             </div>
           </div>
 
-          <!-- Teclat -->
-          <div class="curs-check-item" id="item-teclat">
-            <div class="curs-check-header" onclick="toggleCurs('teclat')">
-              <input type="checkbox" id="check-teclat" name="curs_teclat" value="si" onchange="toggleCurs('teclat')" />
-              <span>Teclat <span class="durada">· 1h/sessió</span></span>
-            </div>
-            <div class="curs-grup-select" id="sel-teclat">
-              <select name="grup_teclat">
-                <option value="">— Tria el grup —</option>
-                <option value="Sènior +65 · Dilluns 12h">Sènior (+65) · Dilluns 12h</option>
-                <option value="Emergent 12–17 · Dimarts 16h">Emergent (12–17) · Dimarts 16h</option>
-                <option value="Jove 18–34 · Dimarts 17h">Jove (18–34) · Dimarts 17h</option>
-                <option value="Adult 35–64 · Dimarts 18h">Adult (35–64) · Dimarts 18h</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Cant -->
-          <div class="curs-check-item" id="item-cant">
-            <div class="curs-check-header" onclick="toggleCurs('cant')">
-              <input type="checkbox" id="check-cant" name="curs_cant" value="si" onchange="toggleCurs('cant')" />
-              <span>Cant <span class="durada">· 1h/sessió</span></span>
-            </div>
-            <div class="curs-grup-select" id="sel-cant">
-              <select name="grup_cant">
-                <option value="">— Tria el grup —</option>
-                <option value="Senior +65 · Dilluns 11h">Senior (+65) · Dilluns 11h</option>
-                <option value="Emergent 12–17 · Dimarts 16h">Emergent (12–17) · Dimarts 16h</option>
-                <option value="Jove 18–34 · Dimarts 17h">Jove (18–34) · Dimarts 17h</option>
-                <option value="Adult 35–64 · Dimarts 18h">Adult (35–64) · Dimarts 18h</option>
-              </select>
-            </div>
-          </div>
-
           <!-- Bateria -->
           <div class="curs-check-item" id="item-bat">
             <div class="curs-check-header" onclick="toggleCurs('bat')">
@@ -927,11 +899,45 @@
             </div>
             <div class="curs-grup-select" id="sel-bat">
               <select name="grup_bateria">
+                <option value="">— Tria l'horari —</option>
+                <option value="Bateria · Dimarts 15h">Dimarts 15h</option>
+                <option value="Bateria · Dimarts 16h">Dimarts 16h</option>
+                <option value="Bateria · Dimarts 17h">Dimarts 17h</option>
+                <option value="Bateria · Dimarts 18h">Dimarts 18h</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Classes individuals -->
+          <div class="curs-check-item" id="item-indiv">
+            <div class="curs-check-header" onclick="toggleCurs('indiv')">
+              <input type="checkbox" id="check-indiv" name="curs_classes_individuals" value="si" onchange="toggleCurs('indiv')" />
+              <span>Classes individuals (cant, teclat, guitarra...) <span class="durada">· 1h/sessió</span></span>
+            </div>
+            <div class="curs-grup-select" id="sel-indiv">
+              <p style="font-size:0.88rem; color:#555; padding:0 0 0.5rem 0; margin:0;">
+                💬 Indica a l'apartat d'observacions quin instrument t'interessa i la teva disponibilitat horària.
+              </p>
+              <select name="grup_classes_individuals">
+                <option value="">— Tria l'opció —</option>
+                <option value="Classes individuals · Horari a confirmar amb l'escola">Confirmar horaris amb l'escola</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Rockin -->
+          <div class="curs-check-item" id="item-rockin">
+            <div class="curs-check-header" onclick="toggleCurs('rockin')">
+              <input type="checkbox" id="check-rockin" name="curs_rockin" value="si" onchange="toggleCurs('rockin')" />
+              <span>Rockin — Música en grup <span class="durada">· 1h/sessió</span></span>
+            </div>
+            <div class="curs-grup-select" id="sel-rockin">
+              <select name="grup_rockin">
                 <option value="">— Tria el grup —</option>
-                <option value="Gr. 1 · Dimarts 15h">Gr. 1 · Dimarts 15h</option>
-                <option value="Gr. 2 · Dimarts 16h">Gr. 2 · Dimarts 16h</option>
-                <option value="Gr. 3 · Dimarts 17h">Gr. 3 · Dimarts 17h</option>
-                <option value="Gr. 4 · Dimarts 18h">Gr. 4 · Dimarts 18h</option>
+                <option value="Sènior +65 · Dijous 11h">Sènior (+65) · Dijous 11h</option>
+                <option value="Emergent 12–17 · Dimecres 17h">Emergent (12–17 anys) · Dimecres 17h</option>
+                <option value="Jove 18–34 · Dimecres 18h">Jove (18–34 anys) · Dimecres 18h</option>
+                <option value="Adult 35–64 · Dimecres 19h">Adult (35–64 anys) · Dimecres 19h</option>
               </select>
             </div>
           </div>
@@ -981,20 +987,6 @@
             </div>
           </div>
 
-          <!-- Classes individuals -->
-          <div class="curs-check-item" id="item-indiv">
-            <div class="curs-check-header" onclick="toggleCurs('indiv')">
-              <input type="checkbox" id="check-indiv" name="curs_classes_individuals" value="si" onchange="toggleCurs('indiv')" />
-              <span>Classes individuals (cant, teclat, guitarra...) <span class="durada">· 1h/sessió</span></span>
-            </div>
-            <div class="curs-grup-select" id="sel-indiv">
-              <select name="grup_classes_individuals">
-                <option value="">— Tria el grup —</option>
-                <option value="Classes individuals · A confirmar">Horari a confirmar amb l'escola</option>
-              </select>
-            </div>
-          </div>
-
           <!-- Freestyle -->
           <div class="curs-check-item" id="item-free">
             <div class="curs-check-header" onclick="toggleCurs('free')">
@@ -1008,6 +1000,9 @@
               </select>
             </div>
           </div>
+
+
+
 
         </div>
 
@@ -1034,6 +1029,16 @@
           <div class="form-group">
             <label for="observacions">Comentaris, observacions o propostes</label>
             <textarea id="observacions" name="observacions" placeholder="Activitats que t'agradaria fer, horaris que et van millor, propostes de cursos... tot ens ajuda!"></textarea>
+          </div>
+        </div>
+
+        <!-- Disclaimers finals -->
+        <div style="margin-bottom:1.5rem;">
+          <div style="background:#fff8f0; border-left:4px solid var(--vermell); padding:1rem 1.2rem; margin-bottom:0.75rem; font-size:0.92rem; color:#333;">
+            🔸 La preinscripció no garanteix la plaça. L'assignació es farà en funció de la disponibilitat i l'ordre d'inscripció.
+          </div>
+          <div style="background:#fff8f0; border-left:4px solid var(--vermell); padding:1rem 1.2rem; font-size:0.92rem; color:#333;">
+            🔸 No cal tenir coneixements previs per a la realització dels cursos.
           </div>
         </div>
 
@@ -1073,6 +1078,32 @@
 </footer>
 
 <script>
+  // Càlcul automàtic de l'edat
+  function calcularEdat() {
+    var input = document.getElementById('data-naix');
+    var hint = document.getElementById('edat-calculada');
+    if (!input.value) { hint.style.display = 'none'; return; }
+    var naix = new Date(input.value);
+    var avui = new Date();
+    var edat = avui.getFullYear() - naix.getFullYear();
+    var m = avui.getMonth() - naix.getMonth();
+    if (m < 0 || (m === 0 && avui.getDate() < naix.getDate())) edat--;
+    if (edat < 0 || edat > 120) { hint.style.display = 'none'; return; }
+    hint.style.display = 'block';
+    hint.style.color = 'var(--vermell)';
+    hint.style.fontWeight = 'bold';
+    hint.textContent = '→ ' + edat + ' anys';
+    document.getElementById('edat-hidden').value = edat;
+  }
+
+  // Selecció de nivell (radio amb estil de targeta)
+  function selectNivell(val) {
+    ['0','1','2'].forEach(function(v) {
+      var lbl = document.getElementById('lbl-niv' + v);
+      if (lbl) lbl.classList.toggle('actiu', v === val);
+    });
+  }
+
   // Mostrar/amagar desplegable de grup en seleccionar curs
   function toggleCurs(id) {
     const check = document.getElementById('check-' + id);
@@ -1084,69 +1115,48 @@
     } else {
       sel.classList.remove('visible');
       item.classList.remove('actiu');
-      sel.querySelector('select').value = '';
     }
   }
 
-  // Mostrar camp instrument si respon Sí
-  function toggleInstrument(show) {
-    document.getElementById('grup-instrument').style.display = show ? 'block' : 'none';
-  }
-
-  // Mostrar camp tutor si menor (detecta data de naixement)
-  document.getElementById('data-naix').addEventListener('change', function() {
-    const naix = new Date(this.value);
-    const avui = new Date();
-    let edat = avui.getFullYear() - naix.getFullYear();
-    const m = avui.getMonth() - naix.getMonth();
+  // Mostrar camp tutor si és menor d'edat
+  function checkEdat() {
+    var dataNaix = document.getElementById('data-naix').value;
+    if (!dataNaix) return;
+    var naix = new Date(dataNaix);
+    var avui = new Date();
+    var edat = avui.getFullYear() - naix.getFullYear();
+    var m = avui.getMonth() - naix.getMonth();
     if (m < 0 || (m === 0 && avui.getDate() < naix.getDate())) edat--;
-    const camp = document.getElementById('grup-tutor');
-    const input = document.getElementById('tutor');
-    if (edat < 18) {
-      camp.style.display = 'block';
-      input.required = true;
-    } else {
-      camp.style.display = 'none';
-      input.required = false;
-      input.value = '';
-    }
-  });
-
-  // Selecció de nivell (radio amb estil de targeta)
-  function selectNivell(val) {
-    ['0','1','2'].forEach(function(v) {
-      var lbl = document.getElementById('lbl-niv' + v);
-      if (lbl) lbl.classList.toggle('actiu', v === val);
-    });
+    document.getElementById('grup-tutor').style.display = edat < 18 ? 'block' : 'none';
   }
 
   // Gestió enviament formulari amb Formspree
   const form = document.getElementById('form-inscripcio');
+  const btnEnviar = document.getElementById('btn-enviar');
+  const missatgeExit = document.getElementById('missatge-exit');
+
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = document.getElementById('btn-enviar');
-    btn.disabled = true;
-    btn.textContent = 'Enviant...';
-
-    const data = new FormData(form);
+    btnEnviar.disabled = true;
+    btnEnviar.textContent = 'Enviant...';
     try {
-      const resp = await fetch(form.action, {
+      const response = await fetch(form.action, {
         method: 'POST',
-        body: data,
+        body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       });
-      if (resp.ok) {
+      if (response.ok) {
         form.style.display = 'none';
-        document.getElementById('missatge-exit').style.display = 'block';
+        missatgeExit.style.display = 'block';
       } else {
-        btn.disabled = false;
-        btn.textContent = 'Enviar inscripció';
-        alert('Hi ha hagut un error. Torna-ho a intentar o contacta\'ns per correu.');
+        alert('Hi ha hagut un error en l\'enviament. Torna-ho a intentar.');
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = 'Enviar inscripció';
       }
-    } catch (err) {
-      btn.disabled = false;
-      btn.textContent = 'Enviar inscripció';
-      alert('Hi ha hagut un error de connexió. Comprova la connexió i torna-ho a intentar.');
+    } catch(err) {
+      alert('Hi ha hagut un error de connexi\'o. Torna-ho a intentar.');
+      btnEnviar.disabled = false;
+      btnEnviar.textContent = 'Enviar inscripció';
     }
   });
 </script>
