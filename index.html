@@ -836,7 +836,7 @@
             </div>
             <div class="form-group">
               <label for="telefon">Telèfon de contacte <span class="req">*</span></label>
-              <input type="tel" id="telefon" name="telefon" required placeholder="6XX XXX XXX" pattern="[0-9\s\+\-]{9,15}" inputmode="numeric" />
+              <input type="tel" id="telefon" name="telefon" required placeholder="6XX XXX XXX" inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9\s\+\-]/g,'')" />
             </div>
           </div>
           <div class="form-group">
