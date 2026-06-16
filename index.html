@@ -472,6 +472,7 @@
   <ul>
     <li><a href="#graella">Horaris</a></li>
     <li><a href="#cursos">Cursos</a></li>
+    <li><a href="#preus">Preus</a></li>
     <li><a href="#formulari">Inscripció</a></li>
   </ul>
 </nav>
@@ -1128,6 +1129,9 @@
 </footer>
 
 <script>
+  // Límit de data: no es pot seleccionar data futura
+  document.getElementById('data-naix').max = new Date().toISOString().split('T')[0];
+
   // Càlcul automàtic de l'edat
   function calcularEdat() {
     var input = document.getElementById('data-naix');
