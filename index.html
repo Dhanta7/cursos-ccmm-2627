@@ -446,12 +446,78 @@
     footer strong { color: var(--blanc); }
 
     /* === MOBILE === */
+    /* === HAMBURGER === */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--blanc);
+      transition: all 0.25s;
+    }
+    .nav-hamburger.obert span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.obert span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.obert span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     @media (max-width: 640px) {
-      nav ul { gap: 1rem; }
-      nav ul a { font-size: 0.78rem; }
+      /* Nav mòbil */
+      .nav-hamburger { display: flex; }
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--negre);
+        flex-direction: column;
+        gap: 0;
+        border-top: 1px solid #333;
+        z-index: 99;
+      }
+      nav ul.visible { display: flex; }
+      nav ul li a {
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 0.9rem;
+        border-bottom: 1px solid #2a2a2a;
+      }
+
+      /* Hero */
+      .hero { padding: 2.5rem 1.5rem 2rem; }
+      .hero h1 { font-size: 1.6rem; }
+
+      /* Sections */
+      section { padding: 2.5rem 1.2rem; }
+      #preus { padding: 2.5rem 1.2rem; }
+
+      /* Graella: hint de scroll */
+      .graella-wrap::before {
+        content: '← desplaça per veure tots els horaris →';
+        display: block;
+        font-size: 0.75rem;
+        color: #888;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+
+      /* Cursos: 1 columna */
+      .cursos-grid { grid-template-columns: 1fr; }
+
+      /* Preus: taula compacta */
+      #preus table { font-size: 0.8rem; }
+      #preus table th, #preus table td { padding: 0.6rem 0.5rem; }
+
+      /* Formulari */
       .form-row { grid-template-columns: 1fr; }
-      .hero { padding: 3rem 1.5rem; }
-      section { padding: 3rem 1.5rem; }
+      .form-bloc { padding: 1.5rem 1.2rem; }
     }
   </style>
 </head>
@@ -469,11 +535,14 @@
       cases de<br>la <span>música</span> · manresa
     </div>
   </a>
-  <ul>
-    <li><a href="#graella">Horaris</a></li>
-    <li><a href="#cursos">Cursos</a></li>
-    <li><a href="#preus">Preus</a></li>
-    <li><a href="#formulari">Inscripció</a></li>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="nav-menu">
+    <li><a href="#graella" onclick="tancarMenu()">Horaris</a></li>
+    <li><a href="#cursos" onclick="tancarMenu()">Cursos</a></li>
+    <li><a href="#preus" onclick="tancarMenu()">Preus</a></li>
+    <li><a href="#formulari" onclick="tancarMenu()">Inscripció</a></li>
   </ul>
 </nav>
 
@@ -519,7 +588,7 @@
           <tr>
             <td>12h</td>
             <td><span class="curs-pill">Teclat</span> <small>Sènior</small></td>
-            <td><span class="curs-pill">Baix elèctric</span> <small>Sènior</small></td>
+            <td><span class="curs-pill">Baix elèctric</span> <small>Sènior</small><br><span class="curs-pill alt">Combo</span> <small>Sènior</small></td>
             <td></td>
             <td></td>
           </tr>
@@ -542,8 +611,8 @@
               <span class="curs-pill">Cant</span> <small>Emergent</small>
               <span class="curs-pill">Teclat</span> <small>Emergent</small>
             </td>
-            <td></td>
             <td><span class="curs-pill alt">Combo</span> <small>Emergent</small></td>
+            <td></td>
           </tr>
           <tr>
             <td>17h</td>
@@ -561,7 +630,7 @@
               <span class="curs-pill alt">Rockin</span> <small>Emergent</small>
               <span class="curs-pill soft">Freestyle</span> <small>Grup únic</small>
             </td>
-            <td><span class="curs-pill alt">Combo</span> <small>Jove</small></td>
+            <td></td>
           </tr>
           <tr>
             <td>17:30h</td>
@@ -583,14 +652,14 @@
               <span class="curs-pill">Teclat</span> <small>Adult</small>
             </td>
             <td><span class="curs-pill alt">Rockin</span> <small>Jove</small></td>
-            <td><span class="curs-pill alt">Combo</span> <small>Adult</small></td>
+            <td></td>
           </tr>
           <tr>
             <td>19h</td>
-            <td></td>
-            <td></td>
+            <td><span class="curs-pill alt">Combo</span> <small>Jove</small></td>
+            <td><span class="curs-pill alt">Combo</span> <small>Adult</small></td>
             <td><span class="curs-pill alt">Rockin</span> <small>Adult</small></td>
-            <td><span class="curs-pill alt">Combo</span> <small>Sènior</small></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
@@ -710,10 +779,10 @@
         <p>Per a qui ja toca un instrument i vol fer el pas de tocar en banda. Cada setmana assajes amb la resta del grup, aprens a escoltar i a construir arranjaments junts.</p>
         <div class="curs-horaris">
           <strong>Horaris</strong>
-          <div class="horari-row"><span class="horari-grup">Emergent (12–17)</span><span class="horari-dia">Dijous</span><span class="horari-hora">16h</span></div>
-          <div class="horari-row"><span class="horari-grup">Jove (18–34)</span><span class="horari-dia">Dijous</span><span class="horari-hora">17h</span></div>
-          <div class="horari-row"><span class="horari-grup">Adult (35–64)</span><span class="horari-dia">Dijous</span><span class="horari-hora">18h</span></div>
-          <div class="horari-row"><span class="horari-grup">Sènior (+65)</span><span class="horari-dia">Dijous</span><span class="horari-hora">19h</span></div>
+          <div class="horari-row"><span class="horari-grup">Emergent (12–17)</span><span class="horari-dia">Dimecres</span><span class="horari-hora">16h</span></div>
+          <div class="horari-row"><span class="horari-grup">Jove (18–34)</span><span class="horari-dia">Dilluns</span><span class="horari-hora">19h</span></div>
+          <div class="horari-row"><span class="horari-grup">Adult (35–64)</span><span class="horari-dia">Dimarts</span><span class="horari-hora">19h</span></div>
+          <div class="horari-row"><span class="horari-grup">Sènior (+65)</span><span class="horari-dia">Dimarts</span><span class="horari-hora">12h</span></div>
           <p class="curs-duracio">⏱ 1 hora per sessió</p>
         </div>
       </div>
@@ -774,10 +843,16 @@
         </thead>
         <tbody>
           <tr style="border-bottom:1px solid #2a2a2a;">
-            <td style="padding:1rem; color:var(--blanc); font-weight:bold;">Un curs <span style="color:#666; font-size:0.8rem; font-weight:normal; display:block; margin-top:0.2rem;">Instrument, Rockin, Combo, DJing, Producció musical, Freestyle</span></td>
+            <td style="padding:1rem; color:var(--blanc); font-weight:bold;">Un curs · 1h <span style="color:#666; font-size:0.8rem; font-weight:normal; display:block; margin-top:0.2rem;">Instrument, Rockin, Combo, Freestyle</span></td>
             <td style="text-align:right; padding:1rem; color:var(--blanc);">60 €</td>
             <td style="text-align:right; padding:1rem; color:var(--blanc);">184 €</td>
             <td style="text-align:right; padding:1rem; color:var(--vermell); font-weight:bold;">240 €</td>
+          </tr>
+          <tr style="border-bottom:1px solid #2a2a2a;">
+            <td style="padding:1rem; color:var(--blanc); font-weight:bold;">Un curs · 1h 30min <span style="color:#666; font-size:0.8rem; font-weight:normal; display:block; margin-top:0.2rem;">DJing, Producció musical</span></td>
+            <td style="text-align:right; padding:1rem; color:var(--blanc);">90 €</td>
+            <td style="text-align:right; padding:1rem; color:var(--blanc);">276 €</td>
+            <td style="text-align:right; padding:1rem; color:var(--vermell); font-weight:bold;">360 €</td>
           </tr>
           <tr style="border-bottom:1px solid #2a2a2a;">
             <td style="padding:1rem; color:var(--blanc); font-weight:bold;">Bateria <span style="color:#666; font-size:0.8rem; font-weight:normal; display:block; margin-top:0.2rem;">Classes individuals</span></td>
@@ -1005,10 +1080,10 @@
             <div class="curs-grup-select" id="sel-combo">
               <select name="grup_combo">
                 <option value="">— Tria el grup —</option>
-                <option value="Emergent 12–17 · Dijous 16h">Emergent (12–17) · Dijous 16h</option>
-                <option value="Jove 18–34 · Dijous 17h">Jove (18–34) · Dijous 17h</option>
-                <option value="Adult 35–64 · Dijous 18h">Adult (35–64) · Dijous 18h</option>
-                <option value="Sènior +65 · Dijous 19h">Sènior (+65) · Dijous 19h</option>
+                <option value="Emergent 12–17 · Dimecres 16h">Emergent (12–17) · Dimecres 16h</option>
+                <option value="Jove 18–34 · Dilluns 19h">Jove (18–34) · Dilluns 19h</option>
+                <option value="Adult 35–64 · Dimarts 19h">Adult (35–64) · Dimarts 19h</option>
+                <option value="Sènior +65 · Dimarts 12h">Sènior (+65) · Dimarts 12h</option>
               </select>
             </div>
           </div>
@@ -1129,6 +1204,16 @@
 </footer>
 
 <script>
+  // Menú hamburguesa
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('obert');
+    document.getElementById('nav-menu').classList.toggle('visible');
+  }
+  function tancarMenu() {
+    document.getElementById('hamburger').classList.remove('obert');
+    document.getElementById('nav-menu').classList.remove('visible');
+  }
+
   // Límit de data: no es pot seleccionar data futura
   document.getElementById('data-naix').max = new Date().toISOString().split('T')[0];
 
