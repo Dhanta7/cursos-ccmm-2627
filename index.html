@@ -620,6 +620,7 @@
               <span class="curs-pill">Guitarra elèctrica</span> <small>Jove</small>
               <span class="curs-pill">Baix elèctric</span> <small>Jove</small>
               <span class="curs-pill">Guitarra acústica</span> <small>Jove</small>
+              <span class="curs-pill soft">DJing</span> <small>Grup únic</small>
             </td>
             <td>
               <span class="curs-pill">Bateria</span>
@@ -634,7 +635,7 @@
           </tr>
           <tr>
             <td>17:30h</td>
-            <td><span class="curs-pill soft">DJing</span> <small>Grup únic</small></td>
+            <td></td>
             <td><span class="curs-pill soft">Producció musical</span> <small>Grup únic</small></td>
             <td></td>
             <td></td>
@@ -793,7 +794,7 @@
         <p>Aprèn a gestionar una sessió de principi a final: selecció de música, mescla, transicions i lectura de la pista. El curs cobreix les eines bàsiques del DJ modern, tant analògiques com digitals.</p>
         <div class="curs-horaris">
           <strong>Horaris</strong>
-          <div class="horari-row"><span class="horari-grup">Grup únic</span><span class="horari-dia">Dilluns</span><span class="horari-hora">17:30h</span></div>
+          <div class="horari-row"><span class="horari-grup">Grup únic</span><span class="horari-dia">Dilluns</span><span class="horari-hora">17h</span></div>
           <p class="curs-duracio">⏱ 1h 30min per sessió</p>
         </div>
       </div>
@@ -1109,7 +1110,7 @@
             <div class="curs-grup-select" id="sel-dj">
               <select name="grup_djing">
                 <option value="">— Tria el grup —</option>
-                <option value="Grup únic · Dilluns 17:30h">Grup únic · Dilluns 17:30h</option>
+                <option value="Grup únic · Dilluns 17h">Grup únic · Dilluns 17h</option>
               </select>
             </div>
           </div>
@@ -1288,6 +1289,26 @@
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
+
+    // Validació: cada curs marcat ha de tenir un grup seleccionat
+    const cursosMarcats = form.querySelectorAll('.curs-check-item input[type="checkbox"]:checked');
+    if (cursosMarcats.length === 0) {
+      alert('Has de seleccionar almenys un curs.');
+      return;
+    }
+    let grupPendent = null;
+    cursosMarcats.forEach(function(chk) {
+      const id = chk.id.replace('check-', '');
+      const sel = document.querySelector('#sel-' + id + ' select');
+      if (sel && !sel.value) grupPendent = chk;
+    });
+    if (grupPendent) {
+      const nomCurs = grupPendent.closest('.curs-check-item').querySelector('span').textContent.trim();
+      alert('Has de triar el grup per a: ' + nomCurs);
+      grupPendent.closest('.curs-check-item').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
     btnEnviar.disabled = true;
     btnEnviar.textContent = 'Enviant...';
     try {
